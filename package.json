@@ -2,7 +2,7 @@
   "name": "agent-notifier",
   "displayName": "Agent Notifier",
   "description": "Play sound notifications for Claude Code and Codex, locally or over VS Code Remote SSH.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "prinwinter",
   "license": "MIT",
   "icon": "assets/icon.png",

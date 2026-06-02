@@ -30,7 +30,7 @@ This produces `agent-notifier-<version>.vsix`.
 Smoke test the package locally:
 
 ```bash
-code --install-extension agent-notifier-0.1.0.vsix
+code --install-extension agent-notifier-0.1.1.vsix
 ```
 
 Then open a project in VS Code, run **Agent Notifier: Setup Hooks**, open the **Agent Notifier** panel, and turn the sound player on.
