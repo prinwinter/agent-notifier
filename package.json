@@ -1,0 +1,133 @@
+{
+  "name": "agent-notifier",
+  "displayName": "Agent Notifier",
+  "description": "Play sound notifications for Claude Code and Codex, locally or over VS Code Remote SSH.",
+  "version": "0.1.0",
+  "publisher": "prinwinter",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1F2937",
+    "theme": "dark"
+  },
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "codex",
+    "agent",
+    "notification",
+    "sound",
+    "ssh",
+    "remote",
+    "ai",
+    "hook"
+  ],
+  "extensionKind": [
+    "workspace",
+    "ui"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Agent Notifier watches a filesystem signal file written by local or remote agent hooks."
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentNotifier.setupHooks",
+        "title": "Agent Notifier: Setup Hooks"
+      }
+    ],
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "agent-notifier",
+          "title": "Agent Notifier",
+          "icon": "$(bell)"
+        }
+      ]
+    },
+    "views": {
+      "agent-notifier": [
+        {
+          "type": "webview",
+          "id": "agentNotifier.soundPanel",
+          "name": "Sound Player"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Agent Notifier",
+      "properties": {
+        "agentNotifier.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable notifications"
+        },
+        "agentNotifier.soundEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable custom notification sounds (requires Sound Player panel open)"
+        },
+        "agentNotifier.soundVolume": {
+          "type": "number",
+          "default": 0.5,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Sound volume (0.0 - 1.0)"
+        },
+        "agentNotifier.cooldownSeconds": {
+          "type": "number",
+          "default": 3,
+          "minimum": 3,
+          "maximum": 300,
+          "description": "Minimum seconds between notifications"
+        },
+        "agentNotifier.hookEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable hook-based detection (watches signal file)"
+        },
+        "agentNotifier.hookFilePath": {
+          "type": "string",
+          "default": "",
+          "description": "Signal file path written by agent hooks. Leave empty to use platform tmp dir (e.g. /tmp/agent-notifier.jsonl on Linux, %TEMP%\\agent-notifier.jsonl on Windows)."
+        },
+        "agentNotifier.showNotificationMessage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show VS Code notification popup"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "npm run build -- --watch",
+    "package": "npm run build && npx --yes @vscode/vsce package --no-dependencies --allow-missing-repository",
+    "publish": "npm run build && npx --yes @vscode/vsce publish --no-dependencies --allow-missing-repository",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.21.0",
+    "typescript": "^5.4.0"
+  }
+}

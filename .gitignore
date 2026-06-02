@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.vsix
+.agents/
+.codex/
+.vscode-test/
+npm-debug.log*
