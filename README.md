@@ -1,6 +1,7 @@
 # Agent Notifier
 
 Sound notifications for AI coding agents in VS Code.
+
 Visual Studio Marketplace: https://marketplace.visualstudio.com/items?itemName=prinwinter.agent-notifier
 
 ## What it does
